@@ -93,3 +93,4 @@ fabric.properties
 main
 
 *.env
+*.zip

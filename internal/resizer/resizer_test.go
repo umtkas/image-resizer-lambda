@@ -8,10 +8,10 @@ import (
 
 func Test_getResizedImageName(t *testing.T) {
 	imageSize := configs.ImageSize{Height: 200, Width: 200, WidthHeight: "200x200"}
-	sourceImagePath := "/mock/image/path/image.png"
+	sourceImagePath := "../../tmp/image.png"
 	configuration := configs.Configuration{
 		ImageExtension:      "jpeg",
-		LocalImageDirectory: "../../image",
+		LocalImageDirectory: "tmp",
 	}
 
 	expected := "image_" + imageSize.WidthHeight + "." + configuration.ImageExtension
@@ -24,10 +24,10 @@ func Test_getResizedImageName(t *testing.T) {
 
 func Test_resize(t *testing.T) {
 	imageSize := configs.ImageSize{Height: 200, Width: 200, WidthHeight: "200x200"}
-	sourceImagePath := "../../image/testimage.jpg"
+	sourceImagePath := "../../tmp/testimage.jpg"
 	configuration := configs.Configuration{
 		ImageExtension:      "png",
-		LocalImageDirectory: "../../image",
+		LocalImageDirectory: "/tmp",
 	}
 
 	expected := "testimage_" + imageSize.WidthHeight + "." + configuration.ImageExtension
@@ -40,13 +40,13 @@ func Test_resize(t *testing.T) {
 
 func Test_GetResizedImages(t *testing.T) {
 	expectedImageSizes := []configs.ImageSize{configs.ImageSize{Height: 200, Width: 200, WidthHeight: "200x200"}, configs.ImageSize{Height: 300, Width: 300, WidthHeight: "300x300"}}
-	sourceImagePath := "../../image/testimage.jpg"
+	sourceImagePath := "../../tmp/testimage.jpg"
 
 	configuration := configs.Configuration{
 		IsSaveWithAspectRatio: true,
 		ImageExtension:        "png",
 		ImageSizes:            expectedImageSizes,
-		LocalImageDirectory:   "../../image",
+		LocalImageDirectory:   "/tmp",
 	}
 
 	var expectedImageNames []string
@@ -64,6 +64,4 @@ func Test_GetResizedImages(t *testing.T) {
 			t.Fatalf("actual image name is not same as resized image name \nactual: %s\nexpected: %s", actualImageName, expectedImageName)
 		}
 	}
-
-	RemoveImages(configuration)
 }

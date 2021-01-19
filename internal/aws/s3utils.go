@@ -67,7 +67,6 @@ func DownloadFile(configuration configs.Configuration, objectKey string) string 
 
 // UploadFiles uploads resized images to s3 bucket
 func UploadFiles(configuration configs.Configuration, fileNames []string) {
-
 	for _, fileName := range fileNames {
 		uploadFile(configuration, fileName)
 	}
